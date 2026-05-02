@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import {Link} from 'react-router-dom';
 
 function ParagraphPage() {
   const [paragraphs, setParagraphs] = useState([]);
@@ -26,33 +27,41 @@ function ParagraphPage() {
       ) : (
         <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
           {paragraphs.map((item) => (
-            <div key={item.id} style={{
-              backgroundColor: '#fff',
-              padding: '25px',
-              borderRadius: '12px',
-              boxShadow: '0 4px 6px rgba(0,0,0,0.05)',
-              borderLeft: '5px solid #3498db'
-            }}>
-              <span style={{ 
-                display: 'inline-block', 
-                backgroundColor: '#ecf0f1', 
-                padding: '4px 10px', 
-                borderRadius: '20px', 
-                fontSize: '12px', 
-                fontWeight: 'bold',
-                color: '#7f8c8d',
-                marginBottom: '10px'
+            <Link 
+              key={item.id} 
+              to={`/para/${item.id}`} 
+              style={{ textDecoration: 'none' }} // Xóa gạch chân mặc định của thẻ Link
+            >
+              <div style={{
+                backgroundColor: '#fff',
+                padding: '25px',
+                borderRadius: '12px',
+                boxShadow: '0 4px 6px rgba(0,0,0,0.05)',
+                borderLeft: '5px solid #3498db',
+                cursor: 'pointer', // Thêm hình bàn tay khi di chuột vào cho giống nút bấm
+                transition: 'transform 0.2s' // Thêm hiệu ứng mượt mà
               }}>
-                Paragraph #{item.id}
-              </span>
-              <p style={{ 
-                fontSize: '18px', 
-                lineHeight: '1.7', 
-                color: '#2c3e50' 
-              }}>
-                {item.content}
-              </p>
-            </div>
+                <span style={{ 
+                  display: 'inline-block', 
+                  backgroundColor: '#ecf0f1', 
+                  padding: '4px 10px', 
+                  borderRadius: '20px', 
+                  fontSize: '12px', 
+                  fontWeight: 'bold',
+                  color: '#7f8c8d',
+                  marginBottom: '10px'
+                }}>
+                  Paragraph #{item.id}
+                </span>
+                <p style={{ 
+                  fontSize: '18px', 
+                  lineHeight: '1.7', 
+                  color: '#2c3e50' 
+                }}>
+                  {item.content}
+                </p>
+              </div>
+            </Link>
           ))}
         </div>
       )}
